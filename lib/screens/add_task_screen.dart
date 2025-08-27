@@ -15,8 +15,27 @@ class AddTaskScreen extends StatefulWidget {
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _dateController = TextEditingController();
+
   late String _title;
   String? _description;
+  DateTime? picked;
+
+  Future<void> _selectDate(BuildContext context) async {
+    picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+
+    if (picked != null) {
+      setState(() {
+        _dateController.text =
+            "${picked!.day}/${picked!.month}/${picked!.year}";
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -51,6 +70,19 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 decoration: const InputDecoration(labelText: "Description"),
                 onSaved: (value) => _description = value,
               ),
+              const SizedBox(
+                height: 5,
+              ),
+              TextField(
+                controller: _dateController,
+                readOnly: true, // user cannot type, only pick
+                decoration: const InputDecoration(
+                  labelText: "Due Date",
+                  suffixIcon: Icon(Icons.calendar_today),
+                  border: OutlineInputBorder(),
+                ),
+                onTap: () => _selectDate(context),
+              ),
               const SizedBox(height: 20),
               ElevatedButton(
                 child: Text(isEditing ? "Update" : "Save"),
@@ -63,6 +95,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         id: widget.task!.id,
                         title: _title,
                         description: _description,
+                        duedate: picked,
                         isCompleted: widget.task!.isCompleted,
                       );
                       Provider.of<TaskProvider>(context, listen: false)
@@ -72,6 +105,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         id: const Uuid().v4(),
                         title: _title,
                         description: _description,
+                        duedate: picked,
                       );
                       Provider.of<TaskProvider>(context, listen: false)
                           .addTask(newTask);

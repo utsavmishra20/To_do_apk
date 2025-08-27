@@ -37,6 +37,12 @@ class TaskDetailScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 if (updatedTask.description != null)
                   Text("Description: ${updatedTask.description}"),
+                if (updatedTask.duedate != null)
+                  Text(
+                    "Due Date: ${updatedTask.duedate!.day.toString().padLeft(2, '0')}/"
+                    "${updatedTask.duedate!.month.toString().padLeft(2, '0')}/"
+                    "${updatedTask.duedate!.year}",
+                  ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
