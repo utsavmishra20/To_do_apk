@@ -9,11 +9,14 @@ A simple To-Do application built with Flutter where users can add, update, mark 
    ```bash
    git clone https://github.com/your-username/flutter-todo-app.git
 2. Navigate into the project:
-  cd flutter-todo-app
+   ```bash
+   cd flutter-todo-app
 3. Install dependencies:
-  flutter pub get
-4.Run the app:
-  flutter run
+   ```bash
+   flutter pub get
+4. Run the app:
+   ```bash
+   flutter run
 
 
 State Management:-
