@@ -23,3 +23,7 @@ State Management:-
 
 This project uses Provider for state management.
 It helps in efficiently updating the UI when tasks are added, edited, completed, or deleted, while keeping the business logic separated from the widget tree.
+
+Bonus feature implementation:
+
+I have also implemented a bonus feature for task due dates. To do this, I inserted an extra variable named dueDate into the task class. I also modified the "add task" and "task detail" pages to allow for adding and modifying due dates.
